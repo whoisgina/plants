@@ -21,20 +21,19 @@ export default {
 <style lang="scss">
 .plant-card {
   background: #e0e0e0;
-  width: 20%;
+  flex-wrap: wrap;
   margin: 1rem;
   padding: 1rem;
-  flex-wrap: wrap;
+  width: 20%;
 
   &__name {
     font-weight: bold;
   }
 
   &__image {
-    width: 100%;
-    width: 200px;
     height: 200px;
     object-fit: cover;
+    width: 200px;
   }
 }
 </style>
