@@ -1,4 +1,5 @@
-# plants
+# Plants
+🌱✨ Helping you help plants
 
 ## Project setup
 ```
