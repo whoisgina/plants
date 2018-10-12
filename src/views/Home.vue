@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <plant-card v-for="(item, index) in items" 
-                :item="item" />
+    <plant-card v-for="(plant, index) in plants" 
+                :plant="plant" />
   </div>
 </template>
 
 <script>
 import PlantCard from '@/components/PlantCard.vue'
-import axios from 'axios'
+import PlantService from '@/services/PlantService'
 
 export default {
   name: 'home',
@@ -17,31 +17,18 @@ export default {
 
   data () {
     return {
-      items: []
+      plants: []
     }
   },
 
   mounted () {
-    this.loadItems()
+    this.getPlants()
   },
 
   methods: {
-    loadItems () {
-      var self = this
-      var appId = 'app0mdITu5g9AvhRY'
-      var appKey = 'keydSWGobTOzrvf1e'
-      this.items = []
-
-      axios.get(
-        'https://api.airtable.com/v0/' + appId + '/Studio%20plants',
-        { 
-          headers: { Authorization: 'Bearer ' + appKey }
-        }
-      ).then(function (response) {
-        self.items = response.data.records
-      }).catch(function (error) {
-        console.log(error)
-      })
+    async getPlants () {
+      const response = await PlantService.getPlants()
+      this.plants = response.data.records
     }
   }
 }
