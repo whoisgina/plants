@@ -2,6 +2,7 @@
   <div class="home">
     <plant-card v-for="(plant, index) in plants" 
                 :plant="plant"
+                :species="species"
                 :key="index" />
   </div>
 </template>

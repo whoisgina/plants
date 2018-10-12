@@ -3,7 +3,9 @@
     <div class="plant-card__name">
       {{ plant.fields.Name }}
     </div>
-
+    <div class="plant-card__species">
+      {{ species.find(x => x.id === plant.fields.Species[0]).fields.Species }}
+    </div>
     <div v-for="(photo, index) in plant.fields.Photo"
          :key="index">
       <img class="plant-card__image" :src="photo.thumbnails.large.url" />
@@ -14,7 +16,10 @@
 <script>
 export default {
   name: 'PlantCard',
-  props: ['plant']
+  props: [
+    'plant', 
+    'species'
+  ]
 }
 </script>
 
