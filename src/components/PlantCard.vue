@@ -24,12 +24,16 @@ export default {
 </script>
 
 <style lang="scss">
+
 .plant-card {
-  background: #e0e0e0;
+  background: $color-gray-light;
   flex-wrap: wrap;
   margin: 1rem;
   padding: 1rem;
-  width: 20%;
+  width: 100%;
+
+  @include tablet { width: 40%; }
+  @include desktop { width: 20%; }
 
   &__name {
     font-weight: bold;
