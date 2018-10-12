@@ -1,0 +1,13 @@
+header {
+}
+
+.wrapper {
+  margin: 0 auto;
+  max-width: 43rem;
+  padding: 1.5rem 1.5rem 0 1.5rem;
+  height: 100%;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}

@@ -1,0 +1,38 @@
+// Colors
+$color-black: #030303;
+$color-white: #fff;
+$color-gray-light: #E2E2E2;
+$color-gray-mid: #ccc;
+$color-gray-dark: #aaa;
+$color-blue: #4CA8EF;
+$color-lemon: #F2F549;
+$color-lime: #04DB00;
+$color-red: #DB1A00;
+
+$type-family-sans: 'Styrene', sans-serif;
+
+$type-size-base: 16px;
+$type-leading-base: 1.5rem;
+
+$type-size-big: 1.625rem;
+$type-leading-big: 2.5rem;
+
+$type-size-medium: 1.1rem;
+$type-leading-medium: 1.5rem;
+
+$type-size-small: 0.75rem;
+$type-leading-small: 1rem;
+
+// Breakpoints
+$breakpoint-desktop: 1500px;
+$breakpoint-laptop: 1250px;
+$breakpoint-tablet: 1024px;
+$breakpoint-mobile: 640px;
+
+// Transitions
+$base-timing: 0.2s;
+$base-transition: ease;
+
+// Spacing
+$space-large: 3rem;
+$space-small: .9rem;

@@ -1,0 +1,74 @@
+@mixin clearfix {
+  &::before,
+  &::after {
+    clear: both;
+    content: '';
+    display: table;
+  }
+}
+
+@mixin mobile {
+  @media screen and (min-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media screen and (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media screen and (min-width: $breakpoint-laptop) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin full-width-background {
+  position: relative;
+
+  &:before,
+  &:after {
+    background: inherit;
+    display: block;
+    content: " ";
+    position: absolute;
+    width: 9999px;
+    top: 0;
+    bottom: 0;
+  }
+
+  &:before {
+    left: 100%;
+  }
+
+  &:after {
+    right: 100%;
+  }
+}
+
+@mixin link-arrow {
+  position: relative;
+  padding-left: 2em;
+
+  &::before {
+    content: '→';
+    left: 0;
+    position: absolute;
+  }
+}
+
+@mixin bulleted-list {
+  padding-left: 1em;
+  
+  li {
+    list-style: disc; 
+  }
+}
