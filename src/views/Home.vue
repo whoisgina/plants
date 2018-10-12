@@ -6,14 +6,12 @@
 </template>
 
 <script>
-import HelloWorld from '@/components/HelloWorld.vue'
 import PlantCard from '@/components/PlantCard.vue'
 import axios from 'axios'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld,
     PlantCard
   },
 
