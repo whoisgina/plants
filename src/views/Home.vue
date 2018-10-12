@@ -1,7 +1,8 @@
 <template>
   <div class="home">
-    <plant-card v-for="(plant) in plants" 
-                :key="plant" />
+    <plant-card v-for="(plant, index) in plants" 
+                :plant="plant"
+                :key="index" />
   </div>
 </template>
 
