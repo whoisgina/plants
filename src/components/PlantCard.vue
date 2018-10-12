@@ -6,7 +6,7 @@
 
     <div v-for="(photo, index) in plant.fields.Photo"
          :key="index">
-      <img class="plant-card__image" :src="photo.url" />
+      <img class="plant-card__image" :src="photo.thumbnails.large.url" />
     </div>
   </div>
 </template>
