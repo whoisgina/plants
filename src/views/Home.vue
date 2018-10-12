@@ -1,18 +1,43 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <plant-card v-for="(plant, index) in plants" 
+                :plant="plant" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import PlantCard from '@/components/PlantCard.vue'
+import PlantService from '@/services/PlantService'
 
 export default {
   name: 'home',
   components: {
-    HelloWorld
+    PlantCard
+  },
+
+  data () {
+    return {
+      plants: []
+    }
+  },
+
+  mounted () {
+    this.getPlants()
+  },
+
+  methods: {
+    async getPlants () {
+      const response = await PlantService.getPlants()
+      this.plants = response.data.records
+    }
   }
 }
 </script>
+
+<style lang="scss">
+.home {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Styrene B';
+}
+</style>
