@@ -34,22 +34,22 @@
 @mixin full-width-background {
   position: relative;
 
-  &:before,
-  &:after {
+  &::before,
+  &::after {
     background: inherit;
-    display: block;
-    content: " ";
-    position: absolute;
-    width: 9999px;
-    top: 0;
     bottom: 0;
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    width: 9999px;
   }
 
-  &:before {
+  &::before {
     left: 100%;
   }
 
-  &:after {
+  &::after {
     right: 100%;
   }
 }
@@ -67,8 +67,8 @@
 
 @mixin bulleted-list {
   padding-left: 1em;
-  
+
   li {
-    list-style: disc; 
+    list-style: disc;
   }
 }
