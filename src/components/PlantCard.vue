@@ -11,8 +11,8 @@
       <div class="plant-card__species">
         {{ species.find(x => x.id === plant.fields.Species[0]).fields.Species }}
       </div>
-      <input type="checkbox" id="plant-card__healthy" class="plant-card__healthy" v-model="isHealthy" @change="updateHealth()">
-      <label for="plant-card__healthy">Healthy</label>
+      <input type="checkbox" :id="'plant-card__healthy-' + index" class="plant-card__healthy" v-model="isHealthy" @change="updateHealth()">
+      <label :for="'plant-card__healthy-' + index">Healthy</label>
     </div>
   </div>
 </template>
@@ -23,7 +23,8 @@ export default {
   name: 'PlantCard',
   props: [
     'plant', 
-    'species'
+    'species',
+    'index'
   ],
   data () {
     return {
@@ -70,6 +71,10 @@ export default {
     height: 400px;
     object-fit: cover;
     width: 400px;
+  }
+
+  &__healthy {
+    margin-left: 0;
   }
 }
 </style>
