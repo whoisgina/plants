@@ -3,7 +3,8 @@
     <plant-card v-for="(plant, index) in plants" 
                 :plant="plant"
                 :species="species"
-                :key="index" />
+                :key="index" 
+                :index="index"/>
   </div>
 </template>
 
@@ -45,8 +46,14 @@ export default {
 
 <style lang="scss">
 .home {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   font-family: 'Styrene B';
+  grid-gap: 3rem;
+  padding: 3rem;
+  
+  @include mobile { grid-template-columns: repeat(2, 1fr); }
+  @include tablet { grid-template-columns: repeat(3, 1fr); }
+  @include laptop { grid-template-columns: repeat(4, 1fr); }
+  @include desktop { grid-template-columns: repeat(5, 1fr); }
 }
 </style>

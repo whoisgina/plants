@@ -1,0 +1,208 @@
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smooth: antialiased;
+}
+
+::selection {
+  background: $color-black;
+  color: $color-white;
+}
+
+::-moz-selection {
+  background: $color-black;
+  color: $color-white;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, picture, img, figcaption {
+  display: block;
+}
+
+html {
+  font-size: $type-size-base;
+  line-height: $type-leading-base;
+  font-family: $type-family-sans;
+  font-feature-settings: "kern" on, "liga" off, "calt" off, "ss01";
+}
+
+body {
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+
+  h1 &,
+  h2 &,
+  h3 &,
+  h4 &,
+  h5 &,
+  h6 &,
+  p &,
+  li &,
+  blockquote &,
+  cite & {
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+}
+
+p a, span a {
+  border-bottom: 1px solid $color-black;
+}
+
+h1,
+h2 {
+  font-weight: bold;
+  margin-bottom: $space-small;
+  text-align: center;
+
+  &:not(:first-child) {
+    margin-top: $space-large;
+  }
+}
+
+h1 {
+  font-size: $type-size-big;
+  font-weight: bold;
+  line-height: $type-leading-big;
+  margin-top: 1.5rem;
+
+  @include tablet {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+}
+
+h1 + p {
+  @include tablet {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+
+h2 {
+  font-size: $type-size-big;
+  line-height: $type-leading-big;
+}
+
+// Paragraph Spacing
+p,
+ul,
+li {
+  margin-bottom: $space-small;
+}
+
+dt {
+  display: block;
+  margin-top: $space-small;
+
+  &::before {
+    content: '';
+    display: block;
+    margin-top: $space-small;
+  }
+}
+
+dd {
+  display: block;
+}
+
+li a {
+  border-bottom: 1px solid $color-black;
+}
+
+ol,
+ul,
+dl {
+  list-style: none;
+}
+
+blockquote,
+q {
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  quotes: none;
+
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &::after,
+  &::before {
+    content: '';
+    content: none;
+  }
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+strong,
+b {
+  font-weight: 700;
+}
+
+.svg-container {
+  display: inline-block;
+}
+
+svg {
+  max-width: 100%;
+  max-height: 100%;
+  fill: currentColor;
+
+  path {
+    fill: currentColor;
+  }
+}
+
+picture {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+}
+
+cite {
+  font-style: italic;
+}
+
+blockquote {
+  font-style: normal;
+  padding: 0 2rem 2rem 2rem;
+}
