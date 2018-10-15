@@ -53,7 +53,7 @@ export default {
   
   @include mobile { grid-template-columns: repeat(2, 1fr); }
   @include tablet { grid-template-columns: repeat(3, 1fr); }
-  @include laptop { grid-template-columns: repeat(4, 1fr); }
-  @include desktop { grid-template-columns: repeat(5, 1fr); }
+  @include laptop { grid-template-columns: repeat(3, 1fr); }
+  @include desktop { grid-template-columns: repeat(4, 1fr); }
 }
 </style>

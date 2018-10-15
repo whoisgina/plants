@@ -1,18 +1,40 @@
 <template>
-  <div class="plant-card">
-    <div v-for="(photo, index) in plant.fields.Photo"
-         :key="index">
-      <img class="plant-card__image" :src="photo.thumbnails.large.url" />
-    </div>
-    <div class="plant-card__info">
-      <div class="plant-card__name">
-        {{ plant.fields.Name }}
+  <div class="plant-card" @click="detailsShown = !detailsShown">
+    <div :style="{visibility: !detailsShown ? 'visible' : 'hidden'}" class="plant-overview">
+      <div class="plant-overview__info">
+        <div class="plant-overview__name">
+          {{ plant.fields.Name }}
+        </div>
+        <div class="plant-overview__species">
+          {{ species.find(x => x.id === plant.fields.Species[0]).fields.Species }}
+        </div>
+        <input type="checkbox" :id="'plant-overview__healthy-' + index" class="plant-overview__healthy" v-model="isHealthy" @change="updateHealth()">
+        <label :for="'plant-overview__healthy-' + index">Healthy</label>
       </div>
-      <div class="plant-card__species">
+      <div class="plant-overview__image-container" v-for="(photo, index) in plant.fields.Photo"
+          :key="index">
+        <img class="plant-overview__image" :src="photo.thumbnails.large.url" />
+      </div>
+    </div>
+    <div :style="{visibility: detailsShown ? 'visible' : 'hidden'}" class="plant-details">
+      <div class="plant-details__name">
+          {{ plant.fields.Name }}
+      </div>
+      <div class="plant-details__species">
         {{ species.find(x => x.id === plant.fields.Species[0]).fields.Species }}
       </div>
-      <input type="checkbox" :id="'plant-card__healthy-' + index" class="plant-card__healthy" v-model="isHealthy" @change="updateHealth()">
-      <label :for="'plant-card__healthy-' + index">Healthy</label>
+      <div class="plant-details__info">
+        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Water" class="plant-details__heading">Water</h3>
+        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Water }}</p>
+        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Light" class="plant-details__heading">Light</h3>
+        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Light }}</p>
+        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Fertilizer" class="plant-details__heading">Fertilizer</h3>
+        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Fertilizer }}</p>
+        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Mist" class="plant-details__heading">Mist</h3>
+        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Mist }}</p>
+        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Notes" class="plant-details__heading">Notes</h3>
+        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Notes }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -28,7 +50,8 @@ export default {
   ],
   data () {
     return {
-      isHealthy: this.plant.fields.Healthy
+      isHealthy: this.plant.fields.Healthy,
+      detailsShown: false
     }
   },
   methods: {
@@ -50,13 +73,11 @@ export default {
   border: 1px solid $color-black;
   overflow: hidden;
   position: relative;
-  max-width: 400px;
+  max-width: 600px;
+}
 
+.plant-overview {
   &__info {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     padding: 1rem;
     background: $color-white;
   }
@@ -67,14 +88,53 @@ export default {
 
   &__species { font-style: italic; }
 
+  &__image-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+  }
+
   &__image {
-    height: 400px;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     object-fit: cover;
-    width: 400px;
   }
 
   &__healthy {
     margin-left: 0;
+  }
+}
+
+.plant-details {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background: $color-lemon;
+
+  &__name {
+    font-weight: bold;
+  }
+
+  &__species { 
+    font-style: italic; 
+  }
+
+  &__info {
+    margin-top: 1rem;
+  }
+
+  &__heading {
+    font-weight: bold;
+    margin-top: .5rem;
   }
 }
 </style>
