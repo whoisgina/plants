@@ -1,26 +1,18 @@
 <template>
   <div id="plant-card" class="plant-card">
-    <div class="plant-card__name">
-      {{ plant.fields.Name }}
-    </div>
-    <div class="plant-card__species">
-      {{ species.find(x => x.id === plant.fields.Species[0]).fields.Species }}
-    </div>
-    <input type="checkbox" id="plant-card__healthy" class="plant-card__healthy" v-model="isHealthy" @change="updateHealth()">
-    <label for="plant-card__healthy">Healthy</label>
     <div v-for="(photo, index) in plant.fields.Photo"
          :key="index">
       <img class="plant-card__image" :src="photo.thumbnails.large.url" />
     </div>
-
     <div class="plant-card__info">
-
       <div class="plant-card__name">
         {{ plant.fields.Name }}
       </div>
       <div class="plant-card__species">
         {{ species.find(x => x.id === plant.fields.Species[0]).fields.Species }}
       </div>
+      <input type="checkbox" id="plant-card__healthy" class="plant-card__healthy" v-model="isHealthy" @change="updateHealth()">
+      <label for="plant-card__healthy">Healthy</label>
     </div>
   </div>
 </template>
