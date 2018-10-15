@@ -1,12 +1,12 @@
 <template>
   <div class="plant-card" @click="detailsShown = !detailsShown">
-    <!-- <div :style="{visibility: !detailsShown ? 'visible' : 'hidden'}" class="plant-overview">
+    <div :style="{visibility: !detailsShown ? 'visible' : 'hidden'}" class="plant-overview">
       <div class="plant-overview__info">
         <div class="plant-overview__name">
           {{ plant.fields.Name }}
         </div>
         <div class="plant-overview__species">
-          {{ species.find(x => x.id === plant.fields.Species[0]).fields.Species }}
+          {{ species.fields.Species }}
         </div>
         <input type="checkbox" :id="'plant-overview__healthy-' + index" class="plant-overview__healthy" v-model="isHealthy" @change="updateHealth()">
         <label :for="'plant-overview__healthy-' + index">Healthy</label>
@@ -21,21 +21,21 @@
           {{ plant.fields.Name }}
       </div>
       <div class="plant-details__species">
-        {{ species.find(x => x.id === plant.fields.Species[0]).fields.Species }}
+        {{ species.fields.Species }}
       </div>
       <div class="plant-details__info">
-        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Water" class="plant-details__heading">Water</h3>
-        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Water }}</p>
-        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Light" class="plant-details__heading">Light</h3>
-        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Light }}</p>
-        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Fertilizer" class="plant-details__heading">Fertilizer</h3>
-        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Fertilizer }}</p>
-        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Mist" class="plant-details__heading">Mist</h3>
-        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Mist }}</p>
-        <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Notes" class="plant-details__heading">Notes</h3>
-        <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Notes }}</p>
+        <h3 v-if="species.fields.Water" class="plant-details__heading">Water</h3>
+        <p class="plant-details__paragraph">{{ species.fields.Water }}</p>
+        <h3 v-if="species.fields.Light" class="plant-details__heading">Light</h3>
+        <p class="plant-details__paragraph">{{ species.fields.Light }}</p>
+        <h3 v-if="species.fields.Fertilizer" class="plant-details__heading">Fertilizer</h3>
+        <p class="plant-details__paragraph">{{ species.fields.Fertilizer }}</p>
+        <h3 v-if="species.fields.Mist" class="plant-details__heading">Mist</h3>
+        <p class="plant-details__paragraph">{{ species.fields.Mist }}</p>
+        <h3 v-if="species.fields.Notes" class="plant-details__heading">Notes</h3>
+        <p class="plant-details__paragraph">{{ species.fields.Notes }}</p>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -45,9 +45,13 @@ export default {
   name: 'PlantCard',
   props: [
     'plant', 
-    'species',
     'index'
   ],
+  computed: {
+    species () {
+      return this.plant.species
+    }
+  },
   data () {
     return {
       isHealthy: this.plant.fields.Healthy,
