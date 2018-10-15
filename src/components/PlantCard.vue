@@ -1,5 +1,5 @@
 <template>
-  <div id="plant-card" class="plant-card">
+  <div class="plant-card">
     <div v-for="(photo, index) in plant.fields.Photo"
          :key="index">
       <img class="plant-card__image" :src="photo.thumbnails.large.url" />
