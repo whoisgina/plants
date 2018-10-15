@@ -1,6 +1,6 @@
 <template>
   <div class="plant-card" @click="detailsShown = !detailsShown">
-    <div :style="{visibility: !detailsShown ? 'visible' : 'hidden'}" class="plant-overview">
+    <!-- <div :style="{visibility: !detailsShown ? 'visible' : 'hidden'}" class="plant-overview">
       <div class="plant-overview__info">
         <div class="plant-overview__name">
           {{ plant.fields.Name }}
@@ -35,7 +35,7 @@
         <h3 v-if="species.find(x => x.id === plant.fields.Species[0]).fields.Notes" class="plant-details__heading">Notes</h3>
         <p class="plant-details__paragraph">{{ species.find(x => x.id === plant.fields.Species[0]).fields.Notes }}</p>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

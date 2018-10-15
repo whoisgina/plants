@@ -26,6 +26,23 @@ export default {
     }
   },
 
+  computed: {
+    plantsWithSpecies () {
+      if (this.plants.length === 0 || this.species.length === 0) {
+        return []
+      } else {
+        return this.plants.map(p => {
+          let currentSpecies = this.species.find(s => s.id === p.fields.species[0])
+          console.log(currentSpecies)
+          return {
+            ...p,
+            species: currentSpecies
+          }
+        })
+      }
+    }
+  },
+
   mounted () {
     this.getPlants()
     this.getSpecies()
