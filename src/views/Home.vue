@@ -1,8 +1,7 @@
 <template>
   <div class="home">
-    <plant-card v-for="(plant, index) in plants" 
+    <plant-card v-for="(plant, index) in plantsWithSpecies" 
                 :plant="plant"
-                :species="species"
                 :key="index" 
                 :index="index"/>
   </div>
@@ -23,6 +22,23 @@ export default {
     return {
       plants: [],
       species: []
+    }
+  },
+
+  computed: {
+    plantsWithSpecies () {
+      if (this.plants.length === 0 || this.species.length === 0) {
+        return []
+      } else {
+        return this.plants.map(p => {
+          let currentSpecies = this.species.find(s => s.id === p.fields.Species[0])
+          console.log(currentSpecies)
+          return {
+            ...p,
+            species: currentSpecies
+          }
+        })
+      }
     }
   },
 
@@ -53,7 +69,7 @@ export default {
   
   @include mobile { grid-template-columns: repeat(2, 1fr); }
   @include tablet { grid-template-columns: repeat(3, 1fr); }
-  @include laptop { grid-template-columns: repeat(4, 1fr); }
-  @include desktop { grid-template-columns: repeat(5, 1fr); }
+  @include laptop { grid-template-columns: repeat(3, 1fr); }
+  @include desktop { grid-template-columns: repeat(4, 1fr); }
 }
 </style>
