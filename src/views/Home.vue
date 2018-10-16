@@ -3,14 +3,17 @@
     <plant-card v-for="(plant, index) in plantsWithSpecies" 
                 :plant="plant"
                 :key="index" 
-                :index="index"/>
+                :index="index"
+                @watered="handleWatered"/>
   </div>
 </template>
 
 <script>
+import Airtable from '@/services/Airtable'
 import PlantCard from '@/components/PlantCard.vue'
 import PlantService from '@/services/PlantService'
 import SpeciesService from '@/services/SpeciesService'
+import moment from 'moment'
 
 export default {
   name: 'home',
@@ -32,7 +35,7 @@ export default {
       } else {
         return this.plants.map(p => {
           let currentSpecies = this.species.find(s => s.id === p.fields.species[0])
-          console.log(currentSpecies)
+          // Add a fail default
           return {
             ...p,
             species: currentSpecies
@@ -55,6 +58,13 @@ export default {
     async getSpecies () {
       const response = await SpeciesService.getSpecies()
       this.species = response.data.records
+    },
+    handleWatered (e) {
+      Airtable().patch('https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants/' + e.id, {
+        'fields': {
+          'lastWatered': moment().format('YYYY-MM-DD')
+        }
+      }).then((response) => { this.getPlants() })
     }
   }
 }

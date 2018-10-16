@@ -8,9 +8,9 @@
         <div class="plant-overview__species">
           {{ species.fields.species }}
         </div>
-        <input type="checkbox" :id="'plant-overview__healthy-' + index" class="plant-overview__healthy" v-model="isHealthy" @change="updateHealth()" @click.stop>
-        <label class="plant-overview__healthy-label" :for="'plant-overview__healthy-' + index" @click.stop>Healthy</label>
-        <button @click.stop="" disabled>Water</button><span>Not thirsty</span>
+        <button class="thirstiness-button" @click.stop="water" :disabled="!isThirsty">Water</button>
+        <span class="plant-overview__thirstiness" v-if="!isThirsty">{{daysUntilThirsty}} days until thirst</span>
+        <span class="plant-overview__thirstiness plant-overview__thirstiness--thirsty" v-if="isThirsty">Thirsty!</span>
       </div>
       <div class="plant-overview__image-container" v-for="(photo, index) in plant.fields.photo"
           :key="index">
@@ -25,25 +25,12 @@
         {{ species.fields.species }}
       </div>
       <div class="plant-details__info">
-        <h3 v-if="plant.fields.lastWatered" class="plant-details__heading">Last Watered</h3>
-        <p class="plant-details__paragraph">{{ plant.fields.lastWatered }}</p>
-        <h3 v-if="species.fields.water" class="plant-details__heading">Water</h3>
-        <p class="plant-details__paragraph">{{ species.fields.water }}</p>
-        <h3 v-if="species.fields.light" class="plant-details__heading">Light</h3>
-        <p class="plant-details__paragraph">{{ species.fields.light }}</p>
-        <h3 v-if="species.fields.fertilizer" class="plant-details__heading">Fertilizer</h3>
-        <p class="plant-details__paragraph">{{ species.fields.fertilizer }}</p>
-        <h3 v-if="species.fields.mist" class="plant-details__heading">Mist</h3>
-        <p class="plant-details__paragraph">{{ species.fields.mist }}</p>
-        <h3 v-if="species.fields.notes" class="plant-details__heading">Notes</h3>
-        <p class="plant-details__paragraph">{{ species.fields.notes }}</p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Airtable from '@/services/Airtable'
 import moment from 'moment'
 
 export default {
@@ -59,21 +46,30 @@ export default {
     lastWatered () {
       let lastWatered = moment(this.plant.fields.lastWatered, moment.ISO_8601)
       return lastWatered
+    },
+    nextWatered () {
+      let nextWatered = moment(this.plant.fields.nextWatered, moment.ISO_8601)
+      return nextWatered
+    },
+    daysUntilThirsty () {
+      return this.nextWatered.diff(moment(), 'days')
+    },
+    isThirsty () {
+      if (this.daysUntilThirsty <= 0) {
+        return true
+      } else {
+        return false
+      }
     }
   },
   data () {
     return {
-      isHealthy: this.plant.fields.healthy,
       detailsShown: false
     }
   },
   methods: {
-    updateHealth: function () {
-      Airtable().patch('https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants/' + this.plant.id, {
-        'fields': {
-          'healthy': this.isHealthy
-        }
-      })
+    water () {
+      this.$emit('watered', this.plant)
     }
   }
 }
@@ -121,13 +117,21 @@ export default {
     object-fit: cover;
   }
 
-  &__healthy {
+  &__thirstiness-button {
     margin-left: 0;
-    display: none;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 
-  &__healthy-label {
-    display: none;
+  &__thirstiness {
+    color: $color-gray-dark;
+    margin-left: .5rem;
+
+    &--thirsty {
+      color: $color-lime;
+    }
   }
 }
 
