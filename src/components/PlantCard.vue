@@ -44,6 +44,8 @@
 
 <script>
 import Airtable from '@/services/Airtable'
+import moment from 'moment'
+
 export default {
   name: 'PlantCard',
   props: [
@@ -53,6 +55,10 @@ export default {
   computed: {
     species () {
       return this.plant.species
+    },
+    lastWatered () {
+      let lastWatered = moment(this.plant.fields.lastWatered, moment.ISO_8601)
+      return lastWatered
     }
   },
   data () {
