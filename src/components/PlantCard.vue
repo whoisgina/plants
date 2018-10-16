@@ -9,7 +9,8 @@
           {{ species.fields.species }}
         </div>
         <input type="checkbox" :id="'plant-overview__healthy-' + index" class="plant-overview__healthy" v-model="isHealthy" @change="updateHealth()" @click.stop>
-        <label :for="'plant-overview__healthy-' + index" @click.stop>Healthy</label>
+        <label class="plant-overview__healthy-label" :for="'plant-overview__healthy-' + index" @click.stop>Healthy</label>
+        <button @click.stop="" disabled>Water</button><span>Not thirsty</span>
       </div>
       <div class="plant-overview__image-container" v-for="(photo, index) in plant.fields.photo"
           :key="index">
@@ -92,7 +93,9 @@ export default {
     font-weight: bold;
   }
 
-  &__species { font-style: italic; }
+  &__species { 
+    font-style: italic; 
+  }
 
   &__image-container {
     position: relative;
@@ -114,6 +117,11 @@ export default {
 
   &__healthy {
     margin-left: 0;
+    display: none;
+  }
+
+  &__healthy-label {
+    display: none;
   }
 }
 
