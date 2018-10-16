@@ -31,7 +31,7 @@ export default {
         return []
       } else {
         return this.plants.map(p => {
-          let currentSpecies = this.species.find(s => s.id === p.fields.Species[0])
+          let currentSpecies = this.species.find(s => s.id === p.fields.species[0])
           console.log(currentSpecies)
           return {
             ...p,

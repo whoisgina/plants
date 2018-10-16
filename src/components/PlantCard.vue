@@ -3,37 +3,39 @@
     <div :style="{visibility: !detailsShown ? 'visible' : 'hidden'}" class="plant-overview">
       <div class="plant-overview__info">
         <div class="plant-overview__name">
-          {{ plant.fields.Name }}
+          {{ plant.fields.name }}
         </div>
         <div class="plant-overview__species">
-          {{ species.fields.Species }}
+          {{ species.fields.species }}
         </div>
-        <input type="checkbox" :id="'plant-overview__healthy-' + index" class="plant-overview__healthy" v-model="isHealthy" @change="updateHealth()">
-        <label :for="'plant-overview__healthy-' + index">Healthy</label>
+        <input type="checkbox" :id="'plant-overview__healthy-' + index" class="plant-overview__healthy" v-model="isHealthy" @change="updateHealth()" @click.stop>
+        <label :for="'plant-overview__healthy-' + index" @click.stop>Healthy</label>
       </div>
-      <div class="plant-overview__image-container" v-for="(photo, index) in plant.fields.Photo"
+      <div class="plant-overview__image-container" v-for="(photo, index) in plant.fields.photo"
           :key="index">
         <img class="plant-overview__image" :src="photo.thumbnails.large.url" />
       </div>
     </div>
     <div :style="{visibility: detailsShown ? 'visible' : 'hidden'}" class="plant-details">
       <div class="plant-details__name">
-          {{ plant.fields.Name }}
+          {{ plant.fields.name }}
       </div>
       <div class="plant-details__species">
-        {{ species.fields.Species }}
+        {{ species.fields.species }}
       </div>
       <div class="plant-details__info">
-        <h3 v-if="species.fields.Water" class="plant-details__heading">Water</h3>
-        <p class="plant-details__paragraph">{{ species.fields.Water }}</p>
-        <h3 v-if="species.fields.Light" class="plant-details__heading">Light</h3>
-        <p class="plant-details__paragraph">{{ species.fields.Light }}</p>
-        <h3 v-if="species.fields.Fertilizer" class="plant-details__heading">Fertilizer</h3>
-        <p class="plant-details__paragraph">{{ species.fields.Fertilizer }}</p>
-        <h3 v-if="species.fields.Mist" class="plant-details__heading">Mist</h3>
-        <p class="plant-details__paragraph">{{ species.fields.Mist }}</p>
-        <h3 v-if="species.fields.Notes" class="plant-details__heading">Notes</h3>
-        <p class="plant-details__paragraph">{{ species.fields.Notes }}</p>
+        <h3 v-if="plant.fields.lastWatered" class="plant-details__heading">Last Watered</h3>
+        <p class="plant-details__paragraph">{{ plant.fields.lastWatered }}</p>
+        <h3 v-if="species.fields.water" class="plant-details__heading">Water</h3>
+        <p class="plant-details__paragraph">{{ species.fields.water }}</p>
+        <h3 v-if="species.fields.light" class="plant-details__heading">Light</h3>
+        <p class="plant-details__paragraph">{{ species.fields.light }}</p>
+        <h3 v-if="species.fields.fertilizer" class="plant-details__heading">Fertilizer</h3>
+        <p class="plant-details__paragraph">{{ species.fields.fertilizer }}</p>
+        <h3 v-if="species.fields.mist" class="plant-details__heading">Mist</h3>
+        <p class="plant-details__paragraph">{{ species.fields.mist }}</p>
+        <h3 v-if="species.fields.notes" class="plant-details__heading">Notes</h3>
+        <p class="plant-details__paragraph">{{ species.fields.notes }}</p>
       </div>
     </div>
   </div>
@@ -54,7 +56,7 @@ export default {
   },
   data () {
     return {
-      isHealthy: this.plant.fields.Healthy,
+      isHealthy: this.plant.fields.healthy,
       detailsShown: false
     }
   },
@@ -62,7 +64,7 @@ export default {
     updateHealth: function () {
       Airtable().patch('https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants/' + this.plant.id, {
         'fields': {
-          'Healthy': this.isHealthy
+          'healthy': this.isHealthy
         }
       })
     }
