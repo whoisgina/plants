@@ -19,12 +19,19 @@
     </div>
     <div :style="{visibility: detailsShown ? 'visible' : 'hidden'}" class="plant-details">
       <div class="plant-details__name">
-          {{ plant.fields.name }}
+        {{ plant.fields.name }}
       </div>
       <div class="plant-details__species">
         {{ species.fields.species }}
       </div>
       <div class="plant-details__info">
+        <span v-if="species.fields.light">
+          <strong>Light:</strong>
+          <span class="plant-details__sun" v-for="(sun, index) in species.fields.light" :key="index">☀</span>  
+          <span class="plant-details__sun" v-for="(sun, index) in 5 - species.fields.light" :key="index">☉</span>
+        </span>
+        <span v-if="species.fields.mist"><strong>Mist:</strong> {{ species.fields.mist }}</span>
+        <span v-if="species.fields.notes"><strong>Notes:</strong> {{ species.fields.notes }}</span>
       </div>
     </div>
   </div>
@@ -151,14 +158,16 @@ export default {
   &__species { 
     font-style: italic; 
   }
-
-  &__info {
+  
+  span {
+    display: block;
     margin-top: 1rem;
   }
-
-  &__heading {
-    font-weight: bold;
-    margin-top: .5rem;
+  
+  span &__sun {
+    display: inline-block;
+    margin-left: .5rem;
   }
+
 }
 </style>

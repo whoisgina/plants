@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <plant-card v-for="(plant, index) in plantsWithSpecies" 
+    <plant-card v-for="(plant, index) in sortedPlants" 
                 :plant="plant"
                 :key="index" 
                 :index="index"
@@ -42,6 +42,9 @@ export default {
           }
         })
       }
+    },
+    sortedPlants () {
+      return this.plantsWithSpecies.slice().sort(this.compareValues('nextWatered'))
     }
   },
 
@@ -62,9 +65,31 @@ export default {
     handleWatered (e) {
       Airtable().patch('https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants/' + e.id, {
         'fields': {
-          'lastWatered': moment().format('YYYY-MM-DD')
+          'nextWatered': moment().format('YYYY-MM-DD')
         }
       }).then((response) => { this.getPlants() })
+    },
+    compareValues (key, order = 'asc') {
+      return function (a, b) {
+        if (!a.fields.hasOwnProperty(key) || !b.fields.hasOwnProperty(key)) {
+          return 0
+        }
+
+        const varA = (typeof a.fields[key] === 'string')
+          ? a.fields[key].toUpperCase() : a.fields[key]
+        const varB = (typeof b.fields[key] === 'string')
+          ? b.fields[key].toUpperCase() : b.fields[key]
+
+        let comparison = 0
+        if (varA > varB) {
+          comparison = 1
+        } else if (varA < varB) {
+          comparison = -1
+        }
+        return (
+          (order === 'desc') ? (comparison * -1) : comparison
+        )
+      }
     }
   }
 }
