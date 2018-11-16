@@ -70,7 +70,6 @@ export default {
   mounted () {
     this.getPlants()
     this.getSpecies()
-    console.log(_.isEmpty() ? 'Lodash is available here!' : 'Uh oh..')
   },
 
   methods: {
