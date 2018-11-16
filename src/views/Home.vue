@@ -25,7 +25,6 @@ import PlantGrid from '@/components/PlantGrid.vue'
 import PlantService from '@/services/PlantService'
 import SpeciesService from '@/services/SpeciesService'
 import moment from 'moment'
-import _ from 'lodash'
 
 export default {
   name: 'home',
