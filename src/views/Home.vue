@@ -1,9 +1,21 @@
 <template>
   <div class="home">
-    <plant-card v-for="(plant, index) in sortedPlants" 
+    <nav class="sorting-nav">
+      <span class="sorting-nav__heading">Sort by:</span>
+      <a 
+        class="sorting-nav__item" 
+        v-for="(sortKey, index) in Object.keys(sortedPlantsOptions)" 
+        :key="`sort-key-${index}`"
+        @click="sortOrder = sortKey"
+        :class="{active: sortOrder == sortKey}"
+      >
+        {{ sortKey }}
+      </a>
+    </nav>
+
+    <plant-card v-for="(plant, index) in sort(sortOrder)" 
                 :plant="plant"
-                :key="index" 
-                :index="index"
+                :key="`plant-card-${index}`" 
                 @watered="handleWatered"/>
   </div>
 </template>
@@ -14,6 +26,7 @@ import PlantCard from '@/components/PlantCard.vue'
 import PlantService from '@/services/PlantService'
 import SpeciesService from '@/services/SpeciesService'
 import moment from 'moment'
+import _ from 'lodash'
 
 export default {
   name: 'home',
@@ -24,7 +37,8 @@ export default {
   data () {
     return {
       plants: [],
-      species: []
+      species: [],
+      sortOrder: 'Thirst'
     }
   },
 
@@ -43,14 +57,20 @@ export default {
         })
       }
     },
-    sortedPlants () {
-      return this.plantsWithSpecies.slice().sort(this.compareValues('nextWatered'))
+    sortedPlantsOptions () {
+      var plants = this.plantsWithSpecies
+      return {
+        'Thirst': () => { return _.sortBy(plants, plant => plant.fields.nextWatered) },
+        'Pet Name': () => { return _.sortBy(plants, plant => plant.fields.name) },
+        'Species': () => { return _.sortBy(plants, plant => plant.species.fields.species) }
+      }
     }
   },
 
   mounted () {
     this.getPlants()
     this.getSpecies()
+    console.log(_.isEmpty() ? 'Lodash is available here!' : 'Uh oh..')
   },
 
   methods: {
@@ -62,34 +82,15 @@ export default {
       const response = await SpeciesService.getSpecies()
       this.species = response.data.records
     },
+    sort (sortOrder) {
+      return this.sortedPlantsOptions[sortOrder]()
+    },
     handleWatered (e) {
       Airtable().patch('https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants/' + e.id, {
         'fields': {
           'nextWatered': moment().format('YYYY-MM-DD')
         }
       }).then((response) => { this.getPlants() })
-    },
-    compareValues (key, order = 'asc') {
-      return function (a, b) {
-        if (!a.fields.hasOwnProperty(key) || !b.fields.hasOwnProperty(key)) {
-          return 0
-        }
-
-        const varA = (typeof a.fields[key] === 'string')
-          ? a.fields[key].toUpperCase() : a.fields[key]
-        const varB = (typeof b.fields[key] === 'string')
-          ? b.fields[key].toUpperCase() : b.fields[key]
-
-        let comparison = 0
-        if (varA > varB) {
-          comparison = 1
-        } else if (varA < varB) {
-          comparison = -1
-        }
-        return (
-          (order === 'desc') ? (comparison * -1) : comparison
-        )
-      }
     }
   }
 }
@@ -106,5 +107,13 @@ export default {
   @include tablet { grid-template-columns: repeat(3, 1fr); }
   @include laptop { grid-template-columns: repeat(3, 1fr); }
   @include desktop { grid-template-columns: repeat(4, 1fr); }
+}
+
+.sorting-nav {
+  grid-column: 1 / -1;
+
+  a {
+    margin-left: 1rem;
+  }
 }
 </style>
