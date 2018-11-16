@@ -72,7 +72,7 @@ export default {
       this.species = response.data.records
     },
     handleWatered (e) {
-      Airtable().patch('https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants/' + e.id, {
+      Airtable().patch('/Studio%20plants/' + e.id, {
         'fields': {
           'lastWatered': moment().format('YYYY-MM-DD')
         }
