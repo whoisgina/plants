@@ -87,7 +87,7 @@ export default {
     handleWatered (e) {
       Airtable().patch('https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants/' + e.id, {
         'fields': {
-          'nextWatered': moment().format('YYYY-MM-DD')
+          'lastWatered': moment().format('YYYY-MM-DD')
         }
       }).then((response) => { this.getPlants() })
     }
