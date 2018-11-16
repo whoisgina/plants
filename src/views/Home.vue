@@ -1,17 +1,5 @@
 <template>
   <div class="home">
-    <!-- <nav class="sorting-nav">
-      <span class="sorting-nav__heading">Sort by:</span>
-      <a 
-        class="sorting-nav__item" 
-        v-for="(sortKey, index) in 4" 
-        :key="`sort-key-${index}`"
-        @click="sortOrder = sortKey"
-        :class="{active: sortOrder == sortKey}"
-      >
-        {{ sortKey }}
-      </a>
-    </nav> -->
     <PlantGrid 
       :plants="this.plantsWithSpecies"
       @watered="handleWatered"

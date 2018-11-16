@@ -1,5 +1,13 @@
 <template>
   <section class="plant-grid">
+    <nav class="sorting-nav">
+      <span class="sorting-nav__heading">Sort by:</span>
+      <a 
+        class="sorting-nav__item" 
+      >
+        Sort Key
+      </a>
+    </nav>
     <plant-card v-for="(plant, index) in sortedPlants" 
                 :plant="plant"
                 :key="index" 
