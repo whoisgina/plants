@@ -12,23 +12,26 @@
         <span class="plant-overview__thirstiness" v-if="!isThirsty">{{daysUntilThirsty}} days until thirst</span>
         <span class="plant-overview__thirstiness plant-overview__thirstiness--thirsty" v-if="isThirsty">Thirsty!</span>
       </div>
-      <div class="plant-overview__image-container" v-for="(photo, index) in plant.fields.photo"
-          :key="index">
-        <img class="plant-overview__image" :src="photo.thumbnails.large.url" />
+      
+      <div class="plant-overview__image-container">
+        <img class="plant-overview__image" :src="plant.fields.photo[0].thumbnails.large.url" />
       </div>
     </div>
+
     <div :style="{visibility: detailsShown ? 'visible' : 'hidden'}" class="plant-details">
       <div class="plant-details__name">
         {{ plant.fields.name }}
       </div>
+
       <div class="plant-details__species">
         {{ species.fields.species }}
       </div>
+
       <div class="plant-details__info">
         <span v-if="species.fields.light">
           <strong>Light:</strong>
-          <span class="plant-details__sun" v-for="(sun, index) in species.fields.light" :key="index">☀</span>  
-          <span class="plant-details__sun" v-for="(sun, index) in 5 - species.fields.light" :key="index">☉</span>
+          <span class="plant-details__sun" v-for="(sun, index) in species.fields.light" :key="`light-meter-active-${index}`">☀</span>  
+          <span class="plant-details__sun" v-for="(sun, index) in 5 - species.fields.light" :key="`light-meter-inactive-${index}`">☉</span>
         </span>
         <span v-if="species.fields.mist"><strong>Mist:</strong> {{ species.fields.mist }}</span>
         <span v-if="species.fields.notes"><strong>Notes:</strong> {{ species.fields.notes }}</span>
