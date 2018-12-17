@@ -98,7 +98,7 @@ export default {
 <style lang="scss">
 .home {
   display: grid;
-  font-family: 'Styrene B';
+  font-family: $type-family-sans;
   grid-gap: 3rem;
   padding: 3rem;
   
