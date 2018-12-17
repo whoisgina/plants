@@ -13,6 +13,7 @@ import PlantGrid from '@/components/PlantGrid.vue'
 import PlantService from '@/services/PlantService'
 import SpeciesService from '@/services/SpeciesService'
 import moment from 'moment'
+import _ from 'lodash'
 
 export default {
   name: 'home',
@@ -23,7 +24,8 @@ export default {
   data () {
     return {
       plants: [],
-      species: []
+      species: [],
+      sortOrder: 'Thirst'
     }
   },
 
@@ -58,6 +60,9 @@ export default {
       const response = await SpeciesService.getSpecies()
       this.species = response.data.records
     },
+    sort (sortOrder) {
+      return this.sortedPlantsOptions[sortOrder]()
+    },
     handleWatered (e) {
       Airtable().patch('/Studio%20plants/' + e.id, {
         'fields': {
@@ -72,6 +77,14 @@ export default {
 <style lang="scss">
 .home {
   padding: 3rem;
+}
+
+.sorting-nav {
+  grid-column: 1 / -1;
+
+  a {
+    margin-left: 1rem;
+  }
 }
 
 .sorting-nav {
