@@ -1,28 +1,15 @@
 <template>
   <div class="home">
-    <nav class="sorting-nav">
-      <span class="sorting-nav__heading">Sort by:</span>
-      <a 
-        class="sorting-nav__item" 
-        v-for="(sortKey, index) in Object.keys(sortedPlantsOptions)" 
-        :key="`sort-key-${index}`"
-        @click="sortOrder = sortKey"
-        :class="{active: sortOrder == sortKey}"
-      >
-        {{ sortKey }}
-      </a>
-    </nav>
-
-    <plant-card v-for="(plant, index) in sort(sortOrder)" 
-                :plant="plant"
-                :key="`plant-card-${index}`" 
-                @watered="handleWatered"/>
+    <PlantGrid 
+      :plants="this.plantsWithSpecies"
+      @watered="handleWatered"
+    />
   </div>
 </template>
 
 <script>
 import Airtable from '@/services/Airtable'
-import PlantCard from '@/components/PlantCard.vue'
+import PlantGrid from '@/components/PlantGrid.vue'
 import PlantService from '@/services/PlantService'
 import SpeciesService from '@/services/SpeciesService'
 import moment from 'moment'
@@ -31,7 +18,7 @@ import _ from 'lodash'
 export default {
   name: 'home',
   components: {
-    PlantCard
+    PlantGrid
   },
 
   data () {
@@ -56,14 +43,6 @@ export default {
           }
         })
       }
-    },
-    sortedPlantsOptions () {
-      var plants = this.plantsWithSpecies
-      return {
-        'Thirst': () => { return _.sortBy(plants, plant => plant.fields.nextWatered) },
-        'Pet Name': () => { return _.sortBy(plants, plant => plant.fields.name) },
-        'Species': () => { return _.sortBy(plants, plant => plant.species.fields.species) }
-      }
     }
   },
 
@@ -85,7 +64,7 @@ export default {
       return this.sortedPlantsOptions[sortOrder]()
     },
     handleWatered (e) {
-      Airtable().patch('https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants/' + e.id, {
+      Airtable().patch('/Studio%20plants/' + e.id, {
         'fields': {
           'lastWatered': moment().format('YYYY-MM-DD')
         }
@@ -97,15 +76,15 @@ export default {
 
 <style lang="scss">
 .home {
-  display: grid;
-  font-family: 'Styrene B';
-  grid-gap: 3rem;
   padding: 3rem;
-  
-  @include mobile { grid-template-columns: repeat(2, 1fr); }
-  @include tablet { grid-template-columns: repeat(3, 1fr); }
-  @include laptop { grid-template-columns: repeat(3, 1fr); }
-  @include desktop { grid-template-columns: repeat(4, 1fr); }
+}
+
+.sorting-nav {
+  grid-column: 1 / -1;
+
+  a {
+    margin-left: 1rem;
+  }
 }
 
 .sorting-nav {
