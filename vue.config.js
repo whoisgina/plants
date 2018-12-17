@@ -13,6 +13,15 @@ module.exports = {
             ]
           }
         }]
+      },
+      {
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader',
+        options: {
+          patterns: [
+            path.resolve(__dirname, 'src/assets/fonts/[name].[hash:7].[ext]')
+          ]
+        }
       }]
     }
   }
