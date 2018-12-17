@@ -15,8 +15,8 @@ module.exports = {
         }]
       },
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url-loader',
+        test: /\.(woff|ttf|eot|svg)(\?v=[a-z0-9]\.[a-z0-9]\.[a-z0-9])?$/,
+        loader: 'url-loader?limit=100000',
         options: {
           patterns: [
             path.resolve(__dirname, 'src/assets/fonts/[name].[hash:7].[ext]')
