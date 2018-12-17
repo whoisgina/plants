@@ -117,7 +117,7 @@ export default {
 <style lang="scss">
 .plant-grid {
   display: grid;
-  font-family: 'Styrene B';
+  font-family: $type-family-sans;
   grid-gap: 3rem;
   
   @include mobile { grid-template-columns: repeat(2, 1fr); }
