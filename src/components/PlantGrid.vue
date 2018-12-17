@@ -1,6 +1,6 @@
 <template>
   <section class="plant-grid">
-    <nav class="sorting-nav">
+    <nav v-if="loggedIn" class="sorting-nav">
       <span class="sorting-nav__heading">Sort by:</span>
         <a 
           class="sorting-nav__option"
@@ -16,6 +16,7 @@
     <plant-card
       v-for="(plant, index) in filteredSortedPlants" 
       :plant="plant"
+      :loggedIn="loggedIn"
       :key="index" 
       :index="index"
       @watered="handleWatered"
@@ -35,7 +36,8 @@ export default {
   },
 
   props: {
-    plants: Array
+    plants: Array,
+    loggedIn: Boolean
   },
 
   data () {

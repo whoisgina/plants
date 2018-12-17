@@ -8,7 +8,7 @@
         <div class="plant-overview__species">
           {{ species.fields.species }}
         </div>
-        <button class="thirstiness-button" @click.stop="water" :disabled="!isThirsty">Water</button>
+        <button v-if="loggedIn" class="thirstiness-button" @click.stop="water" :disabled="!isThirsty">Water</button>
         <span class="plant-overview__thirstiness" v-if="!isThirsty">{{daysUntilThirsty}} days until thirst</span>
         <span class="plant-overview__thirstiness plant-overview__thirstiness--thirsty" v-if="isThirsty">Thirsty!</span>
       </div>
@@ -45,10 +45,11 @@ import moment from 'moment'
 
 export default {
   name: 'PlantCard',
-  props: [
-    'plant', 
-    'index'
-  ],
+  props: {
+    plant: Object,
+    index: Number,
+    loggedIn: Boolean
+  },
   computed: {
     species () {
       return this.plant.species
