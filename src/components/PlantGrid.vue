@@ -12,9 +12,6 @@
           >
             {{ sortKey.label }}
           </a> 
-
-          <!-- <input class="sorting-nav__option" type="checkbox" id="show-only-thirsty" v-model="showOnlyThirsty">
-          <label for="show-only-thirsty">Thirsty Plants Only</label> -->
       </nav>
     </div>
     <plant-card
@@ -132,6 +129,7 @@ export default {
   grid-gap: 4rem;
   display: grid;
   width: 90%;
+  margin: $space-large 0;
 
   &__header {
     grid-column: 1 / -1;
