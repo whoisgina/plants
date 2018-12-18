@@ -132,6 +132,7 @@ export default {
 
     &:disabled {
       cursor: not-allowed;
+      cursor: url('~@/assets/images/can.png'), auto;
     }
   }
 
