@@ -22,15 +22,16 @@ export default {
   methods: {
     authenticate () {
       axios.get(`/.netlify/functions/login?submission=${this.submittedPassword}`)
-        .then(function (response) {
-          this.loggedIn = true
+        .then((response) => {
           console.log(response)
+          if (response === 'authenticated') {
+            this.loggedIn = true
+          }
         })
-        .catch(function (error) {
-          // handle error
+        .catch((error) => {
           console.log(error)
         })
-        .then(function () {
+        .then(() => {
           this.submittedPassword = ''
         })  
     }
