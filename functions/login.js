@@ -6,12 +6,12 @@ exports.handler = async (event, context) => {
   if (submission === PASSWORD) {
     return {
       statusCode: 200,
-      body: `authenticated with password: ${submission}`
+      body: `authenticated`
     }
   } else {
     return {
       statusCode: 200,
-      body: `declined with password: ${submission}`
+      body: `declined`
     }
   }
 }
