@@ -1,7 +1,7 @@
 <template>
   <section class="plant-grid">
     <div class="plant-grid__callout"><a>Three</a> of your plants are thirsty.</div>
-    <nav class="sorting-nav">
+    <nav v-if="loggedIn" class="sorting-nav">
       <span class="sorting-nav__heading">Sort by:</span>
         <a 
           class="sorting-nav__option"
@@ -18,6 +18,7 @@
     <plant-card
       v-for="(plant, index) in filteredSortedPlants" 
       :plant="plant"
+      :loggedIn="loggedIn"
       :key="index" 
       :index="index"
       @watered="handleWatered"
@@ -37,7 +38,8 @@ export default {
   },
 
   props: {
-    plants: Array
+    plants: Array,
+    loggedIn: Boolean
   },
 
   data () {
@@ -89,6 +91,12 @@ export default {
       return [...this.plants].sort((plantA, plantB) => {
         return plantA.fields.name <= plantB.fields.name ? -1 : 1
       })
+    },
+    thirstyPlantsCount () {
+      let thirstyPlants = [...this.sortedPlants].filter((plant) => {
+        return this.checkThirst(plant)
+      })
+      return thirstyPlants.length
     },
     filteredSortedPlants () {
       if (this.showOnlyThirsty) {

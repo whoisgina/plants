@@ -2,6 +2,7 @@
   <div class="home">
     <PlantGrid 
       :plants="this.plantsWithSpecies"
+      :loggedIn="loggedIn"
       @watered="handleWatered"
     />
   </div>
@@ -18,6 +19,10 @@ export default {
   name: 'home',
   components: {
     PlantGrid
+  },
+
+  props: {
+    loggedIn: Boolean
   },
 
   data () {

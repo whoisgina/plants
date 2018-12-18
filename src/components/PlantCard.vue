@@ -5,7 +5,6 @@
 
     <div :style="{visibility: !detailsShown ? 'visible' : 'hidden'}" 
          class="plant-overview">
-      
       <div class="plant-overview__image-container">
         <img class="plant-overview__image" :src="plant.fields.photo[0].thumbnails.large.url" />
         <button v-if="isThirsty" class="water-button" @click.stop="water">
@@ -52,10 +51,11 @@ import moment from 'moment'
 
 export default {
   name: 'PlantCard',
-  props: [
-    'plant', 
-    'index'
-  ],
+  props: {
+    plant: Object,
+    index: Number,
+    loggedIn: Boolean
+  },
   computed: {
     species () {
       return this.plant.species
