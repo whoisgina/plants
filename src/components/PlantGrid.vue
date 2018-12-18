@@ -1,7 +1,7 @@
 <template>
   <section class="plant-grid">
     <div class="plant-grid__callout"><a>Three</a> of your plants are thirsty.</div>
-    <nav v-if="loggedIn" class="sorting-nav">
+    <nav class="sorting-nav">
       <span class="sorting-nav__heading">Sort by:</span>
         <a 
           class="sorting-nav__option"
