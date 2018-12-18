@@ -81,6 +81,8 @@ export default {
 <style lang="scss">
 .home {
   padding: 2rem;
+  display: flex;
+  justify-content: center;
 
   @include mobile { padding: 4rem; }
 }
