@@ -23,5 +23,4 @@ yarn-error.log*
 *.sln
 *.sw*
 
-# Fonts
-/src/assets/fonts
+src/assets/fonts

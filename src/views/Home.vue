@@ -80,6 +80,7 @@ export default {
 
 <style lang="scss">
 .home {
+  font-family: $type-family-sans;
   padding: 3rem;
 }
 
