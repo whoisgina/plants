@@ -100,7 +100,6 @@ export default {
 
   @include tablet {
     cursor: alias;
-    max-width: 500px;
     margin-bottom: 0;
   }
 

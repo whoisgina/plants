@@ -1,20 +1,22 @@
 <template>
   <section class="plant-grid">
-    <div class="plant-grid__callout"><a>Three</a> of your plants are thirsty.</div>
-    <nav class="sorting-nav">
-      <span class="sorting-nav__heading">Sort by:</span>
-        <a 
-          class="sorting-nav__option"
-          v-for="(sortKey, index) in sortByOptions"
-          :key="index"
-          @click="sortBy = sortKey.name"
-        >
-          {{ sortKey.label }}
-        </a> 
+    <div class="plant-grid__header">
+      <div class="plant-grid__callout"><a>Three</a> of your plants are thirsty.</div>
+      <nav class="sorting-nav">
+        <span class="sorting-nav__heading">Sort by:</span>
+          <a 
+            class="sorting-nav__option"
+            v-for="(sortKey, index) in sortByOptions"
+            :key="index"
+            @click="sortBy = sortKey.name"
+          >
+            {{ sortKey.label }}
+          </a> 
 
-        <!-- <input class="sorting-nav__option" type="checkbox" id="show-only-thirsty" v-model="showOnlyThirsty">
-        <label for="show-only-thirsty">Thirsty Plants Only</label> -->
-    </nav>
+          <!-- <input class="sorting-nav__option" type="checkbox" id="show-only-thirsty" v-model="showOnlyThirsty">
+          <label for="show-only-thirsty">Thirsty Plants Only</label> -->
+      </nav>
+    </div>
     <plant-card
       v-for="(plant, index) in filteredSortedPlants" 
       :plant="plant"
@@ -126,29 +128,23 @@ export default {
 
 <style lang="scss">
 .plant-grid {
-  margin: 1rem auto;  
-  grid-template-columns: repeat(1, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 4rem;
+  display: grid;
+  width: 90%;
+
+  &__header {
+    grid-column: 1 / -1;
+
+    @include tablet {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between; 
+    }
+  }
   
-  @include mobile { 
-    display: grid; 
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 4rem; 
-  }
-
-  @include laptop { 
-    grid-template-columns: repeat(3, 1fr); 
-  }
-
-  @include desktop { 
-    margin: 4rem auto;
-    max-width: 80%;
-    grid-template-columns: repeat(4, 1fr); 
-    grid-gap: 6rem;
-  }
-
   &__callout {
     font-size: 2.5rem;
-    
     line-height: 1.25;
     margin-bottom: 2rem;
 
