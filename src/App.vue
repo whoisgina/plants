@@ -24,7 +24,7 @@ export default {
       axios.get(`/.netlify/functions/login?submission=${this.submittedPassword}`)
         .then((response) => {
           console.log(response)
-          if (response === 'authenticated') {
+          if (response.data === 'authenticated') {
             this.loggedIn = true
           }
         })
