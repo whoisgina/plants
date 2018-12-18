@@ -12,35 +12,29 @@
           <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3018 0.530775C9.75133 -0.176925 8.64967 -0.176925 8.10003 0.530775C5.66239 3.51884 0 11.0676 0 15.1566C0 20.2678 4.16836 24.3567 9.20089 24.3567C14.3121 24.3567 18.401 20.1891 18.401 15.1566C18.401 11.0676 12.7394 3.51884 10.3018 0.530775Z"/>
           </svg>
         </button>
-        <!-- <span class="plant-overview__thirstiness" v-if="!isThirsty">{{daysUntilThirsty}} days until thirst</span> -->
         <span class="plant-overview__thirstiness plant-overview__thirstiness--thirsty" v-if="isThirsty">Thirsty!</span>
       </div>
 
-      <div class="plant-overview__name">
-        {{ plant.fields.name }}
-      </div>
-      <div class="plant-overview__species">
-        {{ species.fields.species }}
-      </div>
     </div>
 
-    <div :style="{visibility: detailsShown ? 'visible' : 'hidden'}" class="plant-details">
-      <div class="plant-details__name">
-        {{ plant.fields.name }}
-      </div>
+    <div class="plant-overview__name">
+      {{ plant.fields.name }}
+    </div>
+    <div class="plant-overview__species">
+      {{ species.fields.species }}
+    </div>
 
-      <div class="plant-details__species">
-        {{ species.fields.species }}
-      </div>
-
+    <div :style="{visibility: detailsShown ? 'visible' : 'hidden'}" 
+         class="plant-details">
       <div class="plant-details__info">
         <span v-if="species.fields.light">
           <strong>Light:</strong>
-          <span class="plant-details__sun" v-for="(sun, index) in species.fields.light" :key="`light-meter-active-${index}`">☀</span>  
-          <span class="plant-details__sun" v-for="(sun, index) in 5 - species.fields.light" :key="`light-meter-inactive-${index}`">☉</span>
+          <span class="plant-details__sun" v-for="(sun, index) in species.fields.light" :key="`light-meter-active-${index}`">☀️</span>  
+          <span class="plant-details__sun" v-for="(sun, index) in 5 - species.fields.light" :key="`light-meter-inactive-${index}`">•</span>
         </span>
         <span v-if="species.fields.mist"><strong>Mist:</strong> {{ species.fields.mist }}</span>
-        <span v-if="species.fields.notes"><strong>Notes:</strong> {{ species.fields.notes }}</span>
+
+        <span v-if="plant.fields.notes"><strong>Notes:</strong> {{ plant.fields.notes }}</span>
       </div>
     </div>
   </div>
@@ -95,6 +89,7 @@ export default {
 <style lang="scss">
 
 .plant-card {  
+  @include fade-in;
   position: relative;
   margin-bottom: 2rem;
 
@@ -103,7 +98,7 @@ export default {
     margin-bottom: 0;
   }
 
-  &.is-not-thirsty { opacity: 0.6; }
+  // &.is-not-thirsty { opacity: 0.6; }
 }
 
 .plant-overview {
@@ -168,8 +163,9 @@ export default {
   }
 
   &__thirstiness {
-    background: $color-pink;
-    color: $color-white;
+    background: $color-lemon;
+    color: $color-black;
+    font-weight: bold;
     font-size: 0.75rem;
     margin-left: .5rem;
     padding: 0.25rem 0.45rem;
@@ -181,13 +177,15 @@ export default {
 }
 
 .plant-details {
-  background: $color-lemon;
-  bottom: 0;
+  @include shadow-gray; 
+  background: $color-white;
   left: 0;
-  padding: 1rem;
+  padding: 1rem 1rem 96% 1rem;
   position: absolute;
   right: 0;
   top: 0;
+  height: 0;
+  border: 1px solid $color-gray-light;
 
   &__name {
     font-weight: bold;
