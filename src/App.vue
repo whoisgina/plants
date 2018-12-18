@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-    <input class="password-input" v-model="submittedPassword"/>
-    <button @click="authenticate">Login</button>
+    <form v-if="!loggedIn" class="login-form" v-on:submit.prevent="authenticate">
+      <input class="password-input" v-model="submittedPassword"/>
+      <input type="submit"/>
+    </form>
     <router-view :loggedIn="loggedIn" />
   </div>
 </template>
@@ -21,6 +23,7 @@ export default {
 
   methods: {
     authenticate () {
+      console.log('submitted' + this.submittedPassword)
       axios.get(`/.netlify/functions/login?submission=${this.submittedPassword}`)
         .then((response) => {
           console.log(response)
