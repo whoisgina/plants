@@ -1,30 +1,31 @@
 <template>
   <div id="app">
-    <form v-if="!loggedIn" class="login-form" v-on:submit.prevent="authenticate">
-      <input class="password-input" v-model="submittedPassword"/>
-      <input type="submit"/>
-    </form>
+    <Header :loggedIn="loggedIn" @authenticate="authenticate" />
     <router-view :loggedIn="loggedIn" />
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Header from './components/Header'
 
 export default {
   name: 'home',
 
+  components: {
+    Header
+  },
+
   data () {
     return {
-      loggedIn: false,
-      submittedPassword: ''
+      loggedIn: false
     }
   },
 
   methods: {
-    authenticate () {
-      console.log('submitted' + this.submittedPassword)
-      axios.get(`/.netlify/functions/login?submission=${this.submittedPassword}`)
+    authenticate (submittedPassword) {
+      console.log('submitted' + submittedPassword)
+      axios.get(`/.netlify/functions/login?submission=${submittedPassword}`)
         .then((response) => {
           console.log(response)
           if (response.data === 'authenticated') {
@@ -35,7 +36,6 @@ export default {
           console.log(error)
         })
         .then(() => {
-          this.submittedPassword = ''
         })  
     }
   }
