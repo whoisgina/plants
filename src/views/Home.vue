@@ -80,23 +80,8 @@ export default {
 
 <style lang="scss">
 .home {
-  font-family: $type-family-sans;
-  padding: 3rem;
-}
+  padding: 2rem;
 
-.sorting-nav {
-  grid-column: 1 / -1;
-
-  a {
-    margin-left: 1rem;
-  }
-}
-
-.sorting-nav {
-  grid-column: 1 / -1;
-
-  a {
-    margin-left: 1rem;
-  }
+  @include mobile { padding: 4rem; }
 }
 </style>

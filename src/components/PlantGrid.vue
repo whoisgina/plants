@@ -1,6 +1,7 @@
 <template>
   <section class="plant-grid">
-    <nav v-if="loggedIn" class="sorting-nav">
+    <div class="plant-grid__callout"><a>Three</a> of your plants are thirsty.</div>
+    <nav class="sorting-nav">
       <span class="sorting-nav__heading">Sort by:</span>
         <a 
           class="sorting-nav__option"
@@ -10,8 +11,9 @@
         >
           {{ sortKey.label }}
         </a> 
-        <input class="sorting-nav__option" type="checkbox" id="show-only-thirsty" v-model="showOnlyThirsty">
-        <label for="show-only-thirsty">Thirsty Plants Only</label>
+
+        <!-- <input class="sorting-nav__option" type="checkbox" id="show-only-thirsty" v-model="showOnlyThirsty">
+        <label for="show-only-thirsty">Thirsty Plants Only</label> -->
     </nav>
     <plant-card
       v-for="(plant, index) in filteredSortedPlants" 
@@ -124,19 +126,66 @@ export default {
 
 <style lang="scss">
 .plant-grid {
-  display: grid;
-  font-family: $type-family-sans;
-  grid-gap: 3rem;
+  margin: 1rem auto;  
+  grid-template-columns: repeat(1, 1fr);
   
-  @include mobile { grid-template-columns: repeat(2, 1fr); }
-  @include tablet { grid-template-columns: repeat(3, 1fr); }
-  @include laptop { grid-template-columns: repeat(3, 1fr); }
-  @include desktop { grid-template-columns: repeat(4, 1fr); }
+  @include mobile { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 4rem; 
+  }
+
+  @include laptop { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
+
+  @include desktop { 
+    margin: 4rem auto;
+    max-width: 80%;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-gap: 6rem;
+  }
+
+  &__callout {
+    font-size: 2.5rem;
+    
+    line-height: 1.25;
+    margin-bottom: 2rem;
+
+    a { border-bottom: 4px solid $color-lemon; }
+
+    @include mobile {
+      font-size: 3rem;
+    }
+
+    @include laptop {
+      grid-column: 1 / 3; 
+    }
+  }
 }
 
 .sorting-nav {
+  margin-bottom: 2rem;
+
+  @include laptop { 
+    text-align: right; 
+    grid-column: 3 / 5; 
+  }
+  
   &__option {
-    margin-left: 1rem;
+    display: block;
+    border: 1px solid $color-gray-light;
+    padding: 0.25rem 0.5rem;
+    width: max-content;
+    text-align: center;
+    margin: 0.25rem 0;
+
+    @include laptop {
+      display: inline-block;
+      margin-left: 1rem;
+      &:hover { border-color: $color-gray-dark; }
+    }
   }
 }
+
 </style>
