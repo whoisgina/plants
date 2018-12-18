@@ -88,6 +88,12 @@ export default {
         return plantA.fields.name <= plantB.fields.name ? -1 : 1
       })
     },
+    thirstyPlantsCount () {
+      let thirstyPlants = [...this.sortedPlants].filter((plant) => {
+        return this.checkThirst(plant)
+      })
+      return thirstyPlants.length
+    },
     filteredSortedPlants () {
       if (this.showOnlyThirsty) {
         return [...this.sortedPlants].filter((plant) => {
