@@ -73,6 +73,11 @@
   }
 }
 
-@mixin shadow {
+@mixin shadow-gray {
   box-shadow: -20px 20px 0 0 $color-shadow;
+}
+
+
+@mixin shadow-yellow {
+  box-shadow: -20px 20px 0 0 $color-lemon;
 }

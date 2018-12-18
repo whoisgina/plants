@@ -13,7 +13,6 @@ import PlantGrid from '@/components/PlantGrid.vue'
 import PlantService from '@/services/PlantService'
 import SpeciesService from '@/services/SpeciesService'
 import moment from 'moment'
-import _ from 'lodash'
 
 export default {
   name: 'home',
@@ -78,21 +77,5 @@ export default {
 .home {
   font-family: $type-family-sans;
   padding: 3rem;
-}
-
-.sorting-nav {
-  grid-column: 1 / -1;
-
-  a {
-    margin-left: 1rem;
-  }
-}
-
-.sorting-nav {
-  grid-column: 1 / -1;
-
-  a {
-    margin-left: 1rem;
-  }
 }
 </style>

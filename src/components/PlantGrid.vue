@@ -1,5 +1,6 @@
 <template>
   <section class="plant-grid">
+    <div class="plant-grid__callout"><a>Three</a> of your plants are thirsty.</div>
     <nav class="sorting-nav">
       <span class="sorting-nav__heading">Sort by:</span>
         <a 
@@ -10,8 +11,9 @@
         >
           {{ sortKey.label }}
         </a> 
-        <input class="sorting-nav__option" type="checkbox" id="show-only-thirsty" v-model="showOnlyThirsty">
-        <label for="show-only-thirsty">Thirsty Plants Only</label>
+
+        <!-- <input class="sorting-nav__option" type="checkbox" id="show-only-thirsty" v-model="showOnlyThirsty">
+        <label for="show-only-thirsty">Thirsty Plants Only</label> -->
     </nav>
     <plant-card
       v-for="(plant, index) in filteredSortedPlants" 
@@ -116,19 +118,37 @@ export default {
 
 <style lang="scss">
 .plant-grid {
+  margin: 4rem auto;
+  max-width: 80%;
   display: grid;
   font-family: $type-family-sans;
-  grid-gap: 3rem;
+  grid-gap: 6rem;
   
   @include mobile { grid-template-columns: repeat(2, 1fr); }
   @include tablet { grid-template-columns: repeat(3, 1fr); }
   @include laptop { grid-template-columns: repeat(3, 1fr); }
   @include desktop { grid-template-columns: repeat(4, 1fr); }
+
+  &__callout {
+    font-size: 3rem;
+    grid-column: 1 / 3; 
+    a { border-bottom: 4px solid $color-lemon; }
+  }
 }
 
 .sorting-nav {
+  grid-column: 3 / 5;
+  text-align: right;
+
   &__option {
     margin-left: 1rem;
+    border: 1px solid $color-gray-light;
+    padding: 0.25rem 0.5rem;
+    width: max-content;
+    text-align: center;
+
+    &:hover { border-color: $color-gray-dark; }
   }
 }
+
 </style>
