@@ -1,6 +1,6 @@
 exports.handler = async (event, context) => {
   const submission = event.queryStringParameters.submission
-  const { PASSWORD } = process.env;
+  const { PASSWORD } = process.env
 
   if (submission === PASSWORD) {
     return {
