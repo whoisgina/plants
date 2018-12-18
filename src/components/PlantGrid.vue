@@ -150,7 +150,7 @@ export default {
       font-size: 3rem;
     }
 
-    @include desktop {
+    @include laptop {
       grid-column: 1 / 3; 
     }
   }
@@ -159,7 +159,7 @@ export default {
 .sorting-nav {
   margin-bottom: 2rem;
 
-  @include desktop { 
+  @include laptop { 
     text-align: right; 
     grid-column: 3 / 5; 
   }
@@ -172,7 +172,7 @@ export default {
     text-align: center;
     margin: 0.25rem 0;
 
-    @include desktop {
+    @include laptop {
       display: inline-block;
       margin-left: 1rem;
       &:hover { border-color: $color-gray-dark; }
