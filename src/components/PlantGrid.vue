@@ -118,36 +118,65 @@ export default {
 
 <style lang="scss">
 .plant-grid {
-  margin: 4rem auto;
-  max-width: 80%;
-  display: grid;
-  font-family: $type-family-sans;
-  grid-gap: 6rem;
+  margin: 1rem auto;  
+  grid-template-columns: repeat(1, 1fr);
   
-  @include mobile { grid-template-columns: repeat(2, 1fr); }
-  @include tablet { grid-template-columns: repeat(3, 1fr); }
-  @include laptop { grid-template-columns: repeat(3, 1fr); }
-  @include desktop { grid-template-columns: repeat(4, 1fr); }
+  @include mobile { 
+    display: grid; 
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 4rem; 
+  }
+
+  @include laptop { 
+    grid-template-columns: repeat(3, 1fr); 
+  }
+
+  @include desktop { 
+    margin: 4rem auto;
+    max-width: 80%;
+    grid-template-columns: repeat(4, 1fr); 
+    grid-gap: 6rem;
+  }
 
   &__callout {
-    font-size: 3rem;
-    grid-column: 1 / 3; 
+    font-size: 2.5rem;
+    
+    line-height: 1.25;
+    margin-bottom: 2rem;
+
     a { border-bottom: 4px solid $color-lemon; }
+
+    @include mobile {
+      font-size: 3rem;
+    }
+
+    @include desktop {
+      grid-column: 1 / 3; 
+    }
   }
 }
 
 .sorting-nav {
-  grid-column: 3 / 5;
-  text-align: right;
+  margin-bottom: 2rem;
 
+  @include desktop { 
+    text-align: right; 
+    grid-column: 3 / 5; 
+  }
+  
   &__option {
-    margin-left: 1rem;
+    display: block;
     border: 1px solid $color-gray-light;
     padding: 0.25rem 0.5rem;
     width: max-content;
     text-align: center;
+    margin: 0.25rem 0;
 
-    &:hover { border-color: $color-gray-dark; }
+    @include desktop {
+      display: inline-block;
+      margin-left: 1rem;
+      &:hover { border-color: $color-gray-dark; }
+    }
   }
 }
 

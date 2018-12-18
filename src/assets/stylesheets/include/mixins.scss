@@ -74,10 +74,18 @@
 }
 
 @mixin shadow-gray {
-  box-shadow: -20px 20px 0 0 $color-shadow;
+  box-shadow: -10px 10px 0 0 $color-shadow;
+
+  @include tablet {
+    box-shadow: -20px 20px 0 0 $color-shadow;
+  }
 }
 
 
 @mixin shadow-yellow {
-  box-shadow: -20px 20px 0 0 $color-lemon;
+  box-shadow: -10px 10px 0 0 $color-lemon;
+
+  @include tablet {
+    box-shadow: -20px 20px 0 0 $color-lemon;
+  }
 }

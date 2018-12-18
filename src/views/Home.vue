@@ -75,7 +75,8 @@ export default {
 
 <style lang="scss">
 .home {
-  font-family: $type-family-sans;
-  padding: 3rem;
+  padding: 2rem;
+
+  @include mobile { padding: 4rem; }
 }
 </style>

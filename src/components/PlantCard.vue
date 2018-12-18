@@ -8,7 +8,7 @@
       
       <div class="plant-overview__image-container">
         <img class="plant-overview__image" :src="plant.fields.photo[0].thumbnails.large.url" />
-        <button v-if="isThirsty" class="thirstiness-button" @click.stop="water">
+        <button v-if="isThirsty" class="water-button" @click.stop="water">
           <svg width="19" height="25" viewBox="0 0 19 25" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3018 0.530775C9.75133 -0.176925 8.64967 -0.176925 8.10003 0.530775C5.66239 3.51884 0 11.0676 0 15.1566C0 20.2678 4.16836 24.3567 9.20089 24.3567C14.3121 24.3567 18.401 20.1891 18.401 15.1566C18.401 11.0676 12.7394 3.51884 10.3018 0.530775Z"/>
           </svg>
@@ -95,9 +95,14 @@ export default {
 <style lang="scss">
 
 .plant-card {  
-  cursor: alias;
-  max-width: 500px;
   position: relative;
+  margin-bottom: 2rem;
+
+  @include tablet {
+    cursor: alias;
+    max-width: 500px;
+    margin-bottom: 0;
+  }
 
   &.is-not-thirsty { opacity: 0.6; }
 }
@@ -137,19 +142,22 @@ export default {
     width: 100%;
   }
 
-  .thirstiness-button {
+  .water-button {
     background: $color-seafoam;
     border-radius: 100%;
     border: none;
     bottom: 1rem;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     font-size: 2rem;
-    left: -3rem;
+    left: -1rem;
     margin-left: 0;
     outline: none;
     padding: 0.85rem 1.5rem;
     position: absolute;
-    z-index: 999;
+
+    @include mobile {
+      left: -3rem;
+    }
 
     svg path { fill: white; }
 
@@ -163,8 +171,9 @@ export default {
   &__thirstiness {
     background: $color-pink;
     color: $color-white;
+    font-size: 0.75rem;
     margin-left: .5rem;
-    padding: 0.5rem;
+    padding: 0.25rem 0.45rem;
     position: absolute;
     right: 1rem;
     top: 1rem;
