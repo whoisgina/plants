@@ -73,6 +73,7 @@ export default {
   &__about {
     margin-top: $space-large;
     max-width: 40ch;
+    line-height: $type-leading-base;
 
   }
 

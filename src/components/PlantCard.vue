@@ -180,7 +180,7 @@ export default {
   @include shadow-gray; 
   background: $color-white;
   left: 0;
-  padding: 1rem 1rem 96% 1rem;
+  padding: 1rem 1rem 95% 1rem;
   position: absolute;
   right: 0;
   top: 0;
