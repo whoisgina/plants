@@ -7,7 +7,7 @@
          class="plant-overview">
       <div class="plant-overview__image-container">
         <img class="plant-overview__image" :src="plant.fields.photo[0].thumbnails.large.url" />
-        <button v-if="isThirsty" class="water-button" @click.stop="water">
+        <button v-if="isThirsty && loggedIn" class="water-button" @click.stop="water">
           <svg width="19" height="25" viewBox="0 0 19 25" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M10.3018 0.530775C9.75133 -0.176925 8.64967 -0.176925 8.10003 0.530775C5.66239 3.51884 0 11.0676 0 15.1566C0 20.2678 4.16836 24.3567 9.20089 24.3567C14.3121 24.3567 18.401 20.1891 18.401 15.1566C18.401 11.0676 12.7394 3.51884 10.3018 0.530775Z"/>
           </svg>
