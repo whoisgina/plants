@@ -1,7 +1,14 @@
 <template>
   <section class="plant-grid">
     <div class="plant-grid__header">
-      <div class="plant-grid__callout"><a>Three</a> of your plants are thirsty.</div>
+      <div class="plant-grid__callout">
+        <template v-if="thirstyPlantsCount === 'Zero'">
+          All of your plants are happy.
+        </template>
+        <template v-else>
+          <a>{{ thirstyPlantsCount }}</a> of your plants are thirsty.
+        </template>
+      </div>
       <nav class="sorting-nav">
         <span class="sorting-nav__heading">Sort by:</span>
           <a 
@@ -12,9 +19,6 @@
           >
             {{ sortKey.label }}
           </a> 
-
-          <!-- <input class="sorting-nav__option" type="checkbox" id="show-only-thirsty" v-model="showOnlyThirsty">
-          <label for="show-only-thirsty">Thirsty Plants Only</label> -->
       </nav>
     </div>
     <plant-card
@@ -98,7 +102,10 @@ export default {
       let thirstyPlants = [...this.sortedPlants].filter((plant) => {
         return this.checkThirst(plant)
       })
-      return thirstyPlants.length
+      const converter = require('number-to-words')
+      let asWord = converter.toWords(thirstyPlants.length)
+      // Capitalize the first letter
+      return asWord[0].toUpperCase() + asWord.substring(1)
     },
     filteredSortedPlants () {
       if (this.showOnlyThirsty) {
