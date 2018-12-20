@@ -139,6 +139,7 @@ export default {
   grid-gap: 4rem;
   display: grid;
   width: 90%;
+  margin: $space-large 0;
 
   &__header {
     grid-column: 1 / -1;
