@@ -22,6 +22,14 @@ export default {
     }
   },
 
+  mounted () {
+    this.$airtable.getTable('Plant species').then(data => {
+      console.log(data)
+    }).catch(error => {
+      console.log(error)
+    })
+  },
+
   methods: {
     authenticate (submittedPassword) {
       console.log('submitted' + submittedPassword)
