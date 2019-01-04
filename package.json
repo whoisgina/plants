@@ -6,9 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "npm run fonts:fetch && vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "fonts:fetch": "wget -O fonts.zip $FONTS_URL; unzip fonts.zip -d ./src/assets; rm fonts.zip",
     "test:e2e": "vue-cli-service test:e2e",
-    "test:unit": "vue-cli-service test:unit",
-    "fonts:fetch": "wget -O fonts.zip $FONTS_URL; unzip fonts.zip -d ./src/assets; rm fonts.zip"
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -31,6 +31,7 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "style-resources-loader": "^1.2.1",
+    "vue-cli-plugin-netlify-lambda": "^0.1.0",
     "vue-template-compiler": "^2.5.17"
   }
 }

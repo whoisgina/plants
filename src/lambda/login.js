@@ -1,17 +1,17 @@
 const { PASSWORD } = process.env
 
-exports.handler = async (event, context) => {
+export function handler(event, context, callback) {
   const submission = event.queryStringParameters.submission
 
   if (submission === PASSWORD) {
-    return {
+    callback (null, {
       statusCode: 200,
       body: `authenticated`
-    }
+    })
   } else {
-    return {
+    callback (null, {
       statusCode: 200,
       body: `declined`
-    }
+    })
   }
 }
