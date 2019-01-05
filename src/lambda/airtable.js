@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+const fetch =  require('node-fetch');
 
 const API_ENDPOINT =
   "https://api.airtable.com/v0/app0mdITu5g9AvhRY/Studio%20plants";
