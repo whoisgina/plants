@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <Header :loggedIn="loggedIn" @authenticate="authenticate" />
-    <router-view :loggedIn="loggedIn" />
+    <router-view 
+      :loggedIn="loggedIn" 
+      :plants="plants" 
+      :species="species"
+    />
   </div>
 </template>
 
@@ -18,16 +22,15 @@ export default {
 
   data () {
     return {
-      loggedIn: false
+      loggedIn: false,
+      plants: [],
+      species: []
     }
   },
 
   mounted () {
-    this.$airtable.getTable('Plant species').then(data => {
-      console.log(data)
-    }).catch(error => {
-      console.log(error)
-    })
+    this.getSpecies()
+    this.getPlants()
   },
 
   methods: {
@@ -45,7 +48,26 @@ export default {
         })
         .then(() => {
         })  
+    },
+
+    getSpecies () {
+      this.$airtable.getTable('Plant%20species').then(data => {
+        this.species = data.records
+      }).catch(error => {
+        console.log(error)
+        this.species = []
+      })
+    },
+
+    getPlants () {
+      this.$airtable.getTable('Studio%20plants').then(data => {
+        this.plants = data.records
+      }).catch(error => {
+        console.log(error)
+        this.plants = []
+      })
     }
+
   }
 }
 </script>

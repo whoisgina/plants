@@ -11,8 +11,6 @@
 <script>
 import Airtable from '@/services/Airtable'
 import PlantGrid from '@/components/PlantGrid.vue'
-import PlantService from '@/services/PlantService'
-import SpeciesService from '@/services/SpeciesService'
 import moment from 'moment'
 
 export default {
@@ -22,13 +20,13 @@ export default {
   },
 
   props: {
-    loggedIn: Boolean
+    loggedIn: Boolean,
+    plants: Array,
+    species: Array
   },
 
   data () {
     return {
-      plants: [],
-      species: [],
       sortOrder: 'Thirst'
     }
   },
@@ -50,20 +48,7 @@ export default {
     }
   },
 
-  mounted () {
-    this.getPlants()
-    this.getSpecies()
-  },
-
   methods: {
-    async getPlants () {
-      const response = await PlantService.getPlants()
-      this.plants = response.data.records
-    },
-    async getSpecies () {
-      const response = await SpeciesService.getSpecies()
-      this.species = response.data.records
-    },
     sort (sortOrder) {
       return this.sortedPlantsOptions[sortOrder]()
     },
