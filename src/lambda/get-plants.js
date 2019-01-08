@@ -22,7 +22,7 @@ exports.handler = function(event, context, callback) {
         var formattedResponse = {
           "records": response
         }
-      return callback(null, { statusCode: 400, body: JSON.stringify(formattedResponse) });
+      return callback(null, { statusCode: 200, body: JSON.stringify(formattedResponse) });
     }
   })
 }
