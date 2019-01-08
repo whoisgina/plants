@@ -19,6 +19,7 @@ exports.handler = function(event, context, callback) {
     if (err) { 
       console.error(err); return; 
     } else {
+        console.log('success')
         var formattedResponse = {
           "records": response
         }
