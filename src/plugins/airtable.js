@@ -14,9 +14,15 @@ export default {
 
     Vue.prototype.$airtable = {
       getTable (tableName) {
-        return fetch(apiUrl + tableName, {
-          headers: apiOptions.headers
-        }).then(response => response.json())
+        fetch(`/.netlify/functions/get-table?table=${tableName}`, {
+          method: 'POST',
+          credentials: 'same-origin',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }).then(response => {
+          return response.json()
+        })
       },
       
       updateRecord (tableName, recordId, attributes = {}) {

@@ -5,6 +5,7 @@
       :loggedIn="loggedIn" 
       :plants="plants" 
       :species="species"
+      @updateplants="getPlants"
     />
   </div>
 </template>
