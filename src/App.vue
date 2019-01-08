@@ -60,8 +60,16 @@ export default {
     },
 
     getPlants () {
-      this.$airtable.getTable('Studio%20plants').then(data => {
-        this.plants = data.records
+      fetch('/.netlify/functions/get-plants', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        return response.json()
+      }).then(response => {
+        this.plants = response.records
       }).catch(error => {
         console.log(error)
         this.plants = []
