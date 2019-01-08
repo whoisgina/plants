@@ -51,8 +51,16 @@ export default {
     },
 
     getSpecies () {
-      this.$airtable.getTable('Plant%20species').then(data => {
-        this.species = data.records
+      fetch('/.netlify/functions/get-table?table=Plant%20species', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        return response.json()
+      }).then(response => {
+        this.species = response.records
       }).catch(error => {
         console.log(error)
         this.species = []
@@ -60,7 +68,7 @@ export default {
     },
 
     getPlants () {
-      fetch('/.netlify/functions/get-plants', {
+      fetch('/.netlify/functions/get-table?table=Studio%20plants', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
