@@ -16,14 +16,17 @@ exports.handler = function(event, context, callback) {
     fetchNextPage();
 
   }, function done(err) {
+
     if (err) { 
       console.error(err); return; 
     } else {
-        console.log('success')
-        var formattedResponse = {
-          "records": response
-        }
-      return callback(null, { statusCode: 200, body: JSON.stringify(formattedResponse) });
+      console.log('success')
+      var formattedResponse = {
+        "records": response
+    }
+
+    return callback(null, { statusCode: 200, body: JSON.stringify(formattedResponse) });
+
     }
   })
 }
