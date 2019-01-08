@@ -10,8 +10,8 @@ Vue.config.productionTip = false
 dotenv.config()
 
 Vue.use(airtablePlugin, {
-  appId: process.env.APP_ID,
-  appKey: process.env.API_KEY
+  appId: process.env.VUE_APP_APP_ID,
+  appKey: process.env.VUE_APP_API_KEY
 })
 
 new Vue({
