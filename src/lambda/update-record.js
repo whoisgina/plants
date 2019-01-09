@@ -3,9 +3,9 @@ var base = new Airtable({apiKey: process.env.API_KEY}).base(process.env.APP_ID)
 
 exports.handler = function(event, context, callback) {
 
-  // if (event.httpMethod !== "POST") {
-  //   return { statusCode: 405, body: "Method Not Allowed" };
-  // }
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, body: "Method Not Allowed" };
+  }
 
   const recordId = JSON.parse(event.body).recordId
   const fields = JSON.parse(event.body).fields
