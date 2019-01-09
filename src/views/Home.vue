@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import Airtable from '@/services/Airtable'
 import PlantGrid from '@/components/PlantGrid.vue'
 import moment from 'moment'
 
@@ -58,14 +57,14 @@ export default {
         method: 'POST',
         credentials: 'same-origin',
         body: JSON.stringify({
-          fields: {lastWatered: moment().format('YYYY-MM-DD')},
+          fields: { lastWatered: moment().format('YYYY-MM-DD') },
           recordId: e.id
         }),
         headers: {
           'Content-Type': 'application/json'
         }
       }).then((response) => { this.getPlants() })
-      .catch(error => console.error('Error:', error))
+        .catch(error => console.error('Error:', error))
     },
     getPlants () {
       this.$emit('updateplants')
