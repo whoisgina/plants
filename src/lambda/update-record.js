@@ -10,7 +10,7 @@ exports.handler = function(event, context, callback) {
   const recordId = JSON.parse(event.body).recordId
   const fields = JSON.parse(event.body).fields
 
-  base('Studio plants').update(recordId, fields, function done(err, record) {
+  base('Plants').update(recordId, fields, function done(err, record) {
 
     if (err) { 
       console.error(err); return; 
