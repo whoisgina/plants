@@ -1,3 +1,6 @@
 [build]
   Functions = "lambda"
   
+[context.deploy-preview.environment]
+  APP_ID=appd6s11AS3mDFW3N
+  API_KEY=keyy6DAkYqNt0gRAO
