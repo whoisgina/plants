@@ -52,7 +52,7 @@ export default {
     },
 
     getSpecies () {
-      fetch('/.netlify/functions/get-table?table=Plant%20species', {
+      fetch('/.netlify/functions/get-table?table=Species', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
@@ -69,7 +69,7 @@ export default {
     },
 
     getPlants () {
-      fetch('/.netlify/functions/get-table?table=Studio%20plants', {
+      fetch('/.netlify/functions/get-table?table=Plants', {
         method: 'POST',
         credentials: 'same-origin',
         headers: {
