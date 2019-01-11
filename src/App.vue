@@ -1,7 +1,12 @@
 <template>
   <div id="app">
     <Header :loggedIn="loggedIn" @authenticate="authenticate" />
-    <router-view :loggedIn="loggedIn" />
+    <router-view 
+      :loggedIn="loggedIn" 
+      :plants="plants" 
+      :species="species"
+      @updateplants="getPlants"
+    />
   </div>
 </template>
 
@@ -18,8 +23,15 @@ export default {
 
   data () {
     return {
-      loggedIn: false
+      loggedIn: false,
+      plants: [],
+      species: []
     }
+  },
+
+  mounted () {
+    this.getSpecies()
+    this.getPlants()
   },
 
   methods: {
@@ -37,7 +49,42 @@ export default {
         })
         .then(() => {
         })  
+    },
+
+    getSpecies () {
+      fetch('/.netlify/functions/get-table?table=Plant%20species', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        return response.json()
+      }).then(response => {
+        this.species = response.records
+      }).catch(error => {
+        console.log(error)
+        this.species = []
+      })
+    },
+
+    getPlants () {
+      fetch('/.netlify/functions/get-table?table=Studio%20plants', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(response => {
+        return response.json()
+      }).then(response => {
+        this.plants = response.records
+      }).catch(error => {
+        console.log(error)
+        this.plants = []
+      })
     }
+
   }
 }
 </script>
