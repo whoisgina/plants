@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header :loggedIn="loggedIn" @authenticate="authenticate" />
-    <router-view 
+    <Home 
       :loggedIn="loggedIn" 
       :plants="plants" 
       :species="species"
@@ -13,12 +13,14 @@
 <script>
 import axios from 'axios'
 import Header from './components/Header'
+import Home from './views/Home'
 
 export default {
   name: 'home',
 
   components: {
-    Header
+    Header,
+    Home
   },
 
   data () {
