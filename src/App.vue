@@ -8,7 +8,7 @@
     /> -->
 
     <div class="home">
-      <section class="plant-grid">
+      <div class="plant-grid">
         <div class="plant-grid__header">
           <div class="plant-grid__callout">
             <template v-if="thirstyPlantsCount === 'Zero'">
@@ -30,16 +30,18 @@
               </a> 
           </nav>
         </div>
+      </div>
+      <transition-group name="list" tag="section" class="plant-grid" mode="out-in">
         <plant-card
           v-for="(plant, index) in filteredSortedPlants" 
           :plant="plant"
           :loggedIn="loggedIn"
-          :key="index" 
+          :key="plant.id" 
           :index="index"
           :species="species"
           @watered="handleWatered"
         />
-      </section>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -295,5 +297,9 @@ export default {
       &:hover { border-color: $color-gray-dark; }
     }
   }
+}
+
+.list-move {
+  transition: transform 1s;
 }
 </style>
