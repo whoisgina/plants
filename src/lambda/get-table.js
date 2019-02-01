@@ -21,7 +21,7 @@ exports.handler = function(event, context, callback) {
     if (err) { 
       console.error(err); return; 
     } else {
-      console.log('success')
+      console.log(`success with ${process.env}`)
       var formattedResponse = {
         "records": response
     }
