@@ -1,7 +1,3 @@
-[build]
-  command = "npm run build"
-  functions = "lambda"
-
 [context.deploy-preview]
   publish = "dist"
 
