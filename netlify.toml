@@ -1,3 +1,17 @@
 [build]
-  Functions = "lambda"
-  
+  command = "npm run build"
+  functions = "lambda"
+
+[context.deploy-preview]
+  publish = "dist"
+
+[context.deploy-preview.environment]
+  APP_ID = "appd6s11AS3mDFW3N"
+  API_KEY = "keyy6DAkYqNt0gRAO"
+
+[context.branch-deploy]
+  publish = "dist"
+
+[context.branch-deploy.environment]
+  APP_ID = "appd6s11AS3mDFW3N"
+  API_KEY = "keyy6DAkYqNt0gRAO"
