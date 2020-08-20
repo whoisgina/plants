@@ -1,7 +1,13 @@
 # Plants
 🌱✨ Helping you help plants
 
+This app is a front end for an Airtable base. This readme is extremely, wildly WIP. 
+
 ## Project setup
+Copy [this Airtable base](https://airtable.com/universe/expQ4unUii5gYFC7z/plant-watering-schedule), edit content as needed.
+
+Duplicate `.env.example` and add credentials. 
+
 ```
 npm install
 ```
@@ -14,24 +20,4 @@ npm run serve
 ### Compiles and minifies for production
 ```
 npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Run your unit tests
-```
-npm run test:unit
 ```
