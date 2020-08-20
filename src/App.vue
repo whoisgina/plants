@@ -1,12 +1,6 @@
 <template>
   <div id="app">
     <Header :loggedIn="loggedIn" @authenticate="authenticate" />
-    <!-- <Home 
-      :loggedIn="loggedIn" 
-      :plants="plants" 
-      :species="species"
-    /> -->
-
     <div class="home">
       <div class="plant-grid">
         <div class="plant-grid__header">
@@ -30,18 +24,18 @@
               </a> 
           </nav>
         </div>
+        <transition-group name="list" tag="section" class="plant-grid" mode="out-in">
+          <plant-card
+            v-for="(plant, index) in filteredSortedPlants" 
+            :plant="plant"
+            :loggedIn="loggedIn"
+            :key="plant.id" 
+            :index="index"
+            :species="species"
+            @watered="handleWatered"
+          />
+        </transition-group>
       </div>
-      <transition-group name="list" tag="section" class="plant-grid" mode="out-in">
-        <plant-card
-          v-for="(plant, index) in filteredSortedPlants" 
-          :plant="plant"
-          :loggedIn="loggedIn"
-          :key="plant.id" 
-          :index="index"
-          :species="species"
-          @watered="handleWatered"
-        />
-      </transition-group>
     </div>
   </div>
 </template>
@@ -155,9 +149,10 @@ export default {
 
   methods: {
     authenticate (submittedPassword) {
+      console.log('submitted' + submittedPassword)
       axios.get(`/.netlify/functions/login?submission=${submittedPassword}`)
         .then((response) => {
-          // console.log(response)
+          console.log(response)
           if (response.data === 'authenticated') {
             this.loggedIn = true
           }
@@ -244,7 +239,7 @@ export default {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 4rem;
   display: grid;
-  width: 90%;
+  width: 90vw;
   margin: $space-large 0;
 
   &__header {
