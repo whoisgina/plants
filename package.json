@@ -11,7 +11,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
-    "airtable": "^0.5.8",
+    "airtable": "^0.7.2",
     "axios": "^0.18.0",
     "moment": "^2.22.2",
     "node-fetch": "^2.3.0",
